@@ -12,6 +12,7 @@ import logging.config
 logging.config.fileConfig('logging.conf')
 logger = logging.getLogger(__name__)
 
+
 def neolook_alarm():
     config = configparser.ConfigParser()
     config.read('setting.cfg')
@@ -43,7 +44,6 @@ def neolook_alarm():
     except:
         logger.info('No previous HTML file')
         previous_html = ' '
-        pass
     else:
         logger.debug('Found previous HTML file')
 
@@ -56,7 +56,6 @@ def neolook_alarm():
     if pre_list != cur_list:
         logger.debug('Check Data')
 
-        head = soup.head
         body = soup.body
         body.div.decompose()    # decompose <div class='overlay'>...
         body.div.div.decompose()    # decompose <div class='sidebar'>...
@@ -85,13 +84,13 @@ def neolook_alarm():
             if (keyword_check == False):
                 item.decompose()
 
-            time.sleep(0.5)
-            # time.sleep(random.randrange(1, 10))
+            # time.sleep(0.5)
+            time.sleep(random.randrange(1, 10))
 
         html_result = soup.prettify()
         try:
             previous_html_result = open(data_dir + result_name, 'rt').read()
-        except FileNotFoundError as e:
+        except FileNotFoundError:
             logger.info('No previous result file')
             previous_html_result = ' '
 
@@ -128,6 +127,7 @@ def neolook_alarm():
 
     else:
         logger.info('There is nothing to update.')
+
 
 if __name__ == '__main__':
     neolook_alarm()
