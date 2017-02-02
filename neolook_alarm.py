@@ -36,7 +36,7 @@ def neolook_alarm():
     html = requests.get(url, headers = headers).text
     html = html.replace('href="/', 'href="http://neolook.com/')
     html = html.replace('src="/', 'src="http://neolook.com/')
-    logger.info('Successfull connection')
+    logger.info('Successful connection')
 
     try:
         previous_html = open(data_dir + previous_html_name, 'rt').read()
