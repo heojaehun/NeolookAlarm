@@ -6,11 +6,11 @@ import os
 import random
 import send_mail
 import configparser
-import logging
-import logging.config
+# import logging
+# import logging.config
 
-logging.config.fileConfig('logging.conf')
-logger = logging.getLogger(__name__)
+# logging.config.fileConfig('logging.conf')
+# logger = logging.getLogger(__name__)
 
 def neolook_alarm():
     config = configparser.ConfigParser()
@@ -36,16 +36,17 @@ def neolook_alarm():
     html = requests.get(url, headers = headers).text
     html = html.replace('href="/', 'href="http://neolook.com/')
     html = html.replace('src="/', 'src="http://neolook.com/')
-    logger.info('Successful connection')
+    # logger.info('Successful connection')
 
     try:
         previous_html = open(data_dir + previous_html_name, 'rt').read()
     except:
-        logger.info('No previous HTML file')
+        # logger.info('No previous HTML file')
         previous_html = ' '
         pass
     else:
-        logger.debug('Found previous HTML file')
+        pass
+        # logger.debug('Found previous HTML file')
 
     soup = BeautifulSoup(html, 'html.parser')
     pre_soup = BeautifulSoup(previous_html, 'html.parser')
@@ -54,7 +55,7 @@ def neolook_alarm():
     pre_list = pre_soup.find_all('li')
 
     if pre_list != cur_list:
-        logger.debug('Check Data')
+        # logger.debug('Check Data')
 
         head = soup.head
         body = soup.body
@@ -74,7 +75,7 @@ def neolook_alarm():
             item_title = item.text.strip()
             item_url = item.a['href']
             item_html = requests.get(item_url, headers = headers).text
-            logger.debug('({}/{}): {}'.format(count_num, items_num, item_title))
+            # logger.debug('({}/{}): {}'.format(count_num, items_num, item_title))
             count_num = count_num + 1
 
             keyword_check = False
@@ -92,8 +93,8 @@ def neolook_alarm():
         try:
             previous_html_result = open(data_dir + result_name, 'rt').read()
         except FileNotFoundError as e:
-            logger.info('No previous result file')
-            previous_html_result = ' '
+            # logger.info('No previous result file')
+            previous_html_result = ''
 
         if previous_html_result != html_result:
 
@@ -117,7 +118,7 @@ def neolook_alarm():
             # Save Result for web (/var/www/html/neolook_archive/...)
             with open(server_dir + result_name, 'wt', encoding='utf8') as file:
                 file.write(html_result)
-            logger.info('Your data has been updated.')
+            # logger.info('Your data has been updated.')
 
         # Move Old HTML (Previous HTML --> ./old/YYYYMMDD...)
         with open(history_dir + date + previous_html_name, 'wt', encoding='utf8') as file:
@@ -127,7 +128,8 @@ def neolook_alarm():
                 file.write(html)
 
     else:
-        logger.info('There is nothing to update.')
+        pass
+        # logger.info('There is nothing to update.')
 
 if __name__ == '__main__':
     neolook_alarm()
