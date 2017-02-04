@@ -9,6 +9,10 @@ import configparser
 # import logging
 # import logging.config
 
+"""
+crontab 사용시 logging 모듈이 제대로 작동하지 않는 문제가 있어 주석처리 하였음
+"""
+
 # logging.config.fileConfig('logging.conf')
 # logger = logging.getLogger(__name__)
 
