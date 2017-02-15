@@ -17,8 +17,9 @@ crontab 사용시 logging 모듈이 제대로 작동하지 않는 문제가 있�
 # logger = logging.getLogger(__name__)
 
 def neolook_alarm():
+    dir = os.path.dirname(os.path.abspath(__file__))
     config = configparser.ConfigParser()
-    config.read('setting.cfg')
+    config.read(dir + '/setting.cfg')
     server_setting_section = 'SERVER_SETTING'
 
     url = 'http://neolook.com/archives'
