@@ -28,11 +28,11 @@ def neolook_alarm():
     server_path = config.get(server_setting_section, 'server_dir')
 
     # 결과파일 경로 및 파일명 설정
-    data_path = './data/'
+    data_path = path + './data/'
     if not os.path.isdir(data_path):
         os.mkdir(data_path)
 
-    history_path = './history/'
+    history_path = path + './history/'
     if not os.path.isdir(history_path):
         os.mkdir(history_path)
 
