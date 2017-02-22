@@ -32,7 +32,7 @@ def neolook_alarm():
     if not os.path.isdir(data_path):
         os.mkdir(data_path)
 
-    history_path = path + './history/'
+    history_path = path + '/history/
     if not os.path.isdir(history_path):
         os.mkdir(history_path)
 
