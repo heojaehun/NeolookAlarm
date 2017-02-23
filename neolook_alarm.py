@@ -32,7 +32,7 @@ def neolook_alarm():
     if not os.path.isdir(data_path):
         os.mkdir(data_path)
 
-    history_path = path + '/history/
+    history_path = path + '/history/'
     if not os.path.isdir(history_path):
         os.mkdir(history_path)
 
@@ -92,8 +92,8 @@ def neolook_alarm():
                 if (item_html.find(keyword) == -1):
                     item.decompose()
 
-            time.sleep(0.5)
-            # time.sleep(random.randrange(1, 10))
+            #time.sleep(0.5)
+            time.sleep(random.randrange(1, 5))
 
         # 결과 HTML 코드
         current_html_result = soup.prettify()
